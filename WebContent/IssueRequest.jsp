@@ -24,15 +24,15 @@
 	<body>
 		<div class="container">
 			<h1 class="text-center">Create an Issue Request</h1>
-			<form class="form_control mt-2" id="createTicket" action="TicketTable.jsp" method="post">
+			<form class="form_control mt-2" id="createTicket" action="IssueRequest" method="post">
 				<div class="row">
 					<div class="col-12 col-sm-6">
 						<label>Request</label>
-						<input type="text" class="form-control" name="_ticket_name" id="ticket_name" required />
+						<input type="text" class="form-control" name="request" id="request" required />
 					</div>
 					<div class="col-12 col-sm-6">
 						<label>Department</label><br />
-						<select class="form_control" name="_department" id="department" required>
+						<select class="form_control" name="department" id="department" required>
 							<option value="">Choose a Department</option>
 							<option value="Technology">Technology</option>
 							<option value="Human Resources">Human Resources</option>
@@ -48,7 +48,7 @@
 				<div class="row pt-3">
 					<div class="col-12 col-sm-6">
 						<Label>Issue Request Description</Label>
-						<textarea name="_description" class="form-control" required></textarea>
+						<textarea name="description" class="form-control" required></textarea>
 					</div>
 				</div>
 				<button type="submit" class="form-control btn btn-success mt-3">Create Issue Request</button>
