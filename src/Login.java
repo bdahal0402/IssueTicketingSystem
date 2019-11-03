@@ -70,18 +70,4 @@ public class Login extends HttpServlet implements SetConnection {
 			e.printStackTrace();
 		}
 	}
-	
-	public static boolean checkDBusername(String Username) {
-		DBConnection db = new DBConnection();
-		String query = String.format("SELECT COUNT(*) FROM Users WHERE Username='%s'", Username);
-		db.runQuery(query);
-		return true;
-	}
-	
-	public static boolean checkDBPassword(String Password) {
-		DBConnection db = new DBConnection();
-		String query = String.format("SELECT COUNT(*) FROM Users WHERE UserPassword='%s'", Password);
-		db.runQuery(query);
-		return true;
-	}
 }
