@@ -11,30 +11,110 @@
 	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<title>Welcome</title>
+		<style>
+			body, html {
+				height: 100%;
+				margin: 0;
+				font-family: Ariel, Helvetica, sans-serif;
+			}
+			.hero-image {
+				background-image: url("https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+				height: 50%;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				position: relative;
+				opacity: 0.7;
+			}
+		</style>
 	</head>
 	<body>
-	<h1 class="text-center">Welcome To Your Issue Ticketing Portal</h1><br><br>
+		<div class="hero-image">
+			<div class="row h-100 justify-content-center align-items-center">
+  				<div class="col-12">
+  					<%
+	  					request.getSession(false);
+						if(session == null) {
+							
+						} else {
+							String name = request.getParameter("uname"); 
+							System.out.println("Welcome: " + name);
+							if(name == "zach.burton" || name == "cja" || name == "bdahal") {
+					%>
+					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Issue Ticketing System</h1>
+					<%
+	  						} else {
+	  				%>
+	  				<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Issue Ticketing System</h1>
+	  				<%
+	  						}
+						}
+  					%>
+					<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp"></a>
+					<p class="text-center" style="font-size: 25px; font-family: Arial; color: white"></p>
+				</div>
+			</div>
+		</div>
 		<div class="container">
-			<h3 class="text-center">You are now logged in to the Issue Tracking System.</h3>
-			<%
-				request.getSession(false);
-				if(session == null) {
-			%>
-					<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Home</a>
-					<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/login.jsp">Login</a>
-			<%
-				} else {
-					// Already created
-			%>
-					<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp">Logout</a>
-			<%
-				}
-				String name = request.getParameter("uname");
-			%>
-			<br><br>
-			<%
-				System.out.println("Welcome: " + name);
-			%>
+			<div class="row mt-5">
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/IssueRequest.jsp" class="btn text-center">
+							Create Issue Request
+						</a>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/Question.jsp" class="btn text-center">
+							Ask Question to Administrator
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/DepartmentTickets.jsp" class="btn text-center">
+							View Department Tickets
+						</a>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/MyTickets.jsp" class="btn text-center">
+							View My Tickets
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row mt-3">
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewAllTickets.jsp" class="btn text-center">
+							View All Tickets
+						</a>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/AddTicketAdmin.jsp" class="btn text-center">
+							Add Ticket
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/AddIssues.jsp" class="btn text-center">
+							Add Issues
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
