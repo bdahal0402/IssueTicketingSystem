@@ -1,3 +1,5 @@
+package TicketPackage;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -20,13 +22,6 @@ import java.sql.*;
 public class Login extends HttpServlet implements SetConnection {
 	@SuppressWarnings("unused")
 	private static final long serialIDVersion = 1L;
-	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.sendRedirect("login.jsp");
-	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -63,6 +58,7 @@ public class Login extends HttpServlet implements SetConnection {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Wrong username and password combination.');");
+				out.println("location='login.jsp';");
 				out.println("</script>");
 			}
 			
