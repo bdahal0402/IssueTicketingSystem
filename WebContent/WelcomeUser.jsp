@@ -50,8 +50,6 @@
 	  						}
 						}
   					%>
-					<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp"></a>
-					<p class="text-center" style="font-size: 25px; font-family: Arial; color: white"></p>
 				</div>
 			</div>
 		</div>
@@ -115,6 +113,9 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="container mt-5">
+			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp">Logout</a></button>
 		</div>
 	</body>
 </html>
