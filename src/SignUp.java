@@ -1,3 +1,5 @@
+package TicketPackage;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -20,6 +22,7 @@ import java.sql.*;
 public class SignUp extends HttpServlet implements SetConnection {
 	@SuppressWarnings("unused")
 	private static final long serialIDVersion = 1;
+	public static PreparedStatement ps;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -51,10 +54,13 @@ public class SignUp extends HttpServlet implements SetConnection {
 			con = DriverManager.getConnection(url, username, password);
 			
 			Statement stmt = con.createStatement();
+			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s'", firstnameStr, 
+					lastnameStr, emailaddressStr, departmentStr, jobtitleStr, usernameStr, passwordStr);
+			System.out.println(values);
 			
-			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s'",
-					firstnameStr, lastnameStr, emailaddressStr, departmentStr, jobtitleStr, usernameStr, passwordStr);
-			System.out.print(values);
+			if(!confirmpasswordStr.equals(passwordStr)) {
+				System.out.println("Your passwords do not match.");
+			}
 			
 			stmt.executeUpdate("INSERT INTO Users(FirstName, "
 					+ "LastName, "
@@ -64,15 +70,9 @@ public class SignUp extends HttpServlet implements SetConnection {
 					+ "Username,"
 					+ "UserPassword) VALUES (" + values + ")");
 			
-			
-			if(!confirmpasswordStr.equals(passwordStr)) {
-				System.out.println("Your passwords do not match.");
-			}
-		
-			
 			HttpSession session = request.getSession();
-			session.setAttribute("uname", firstnameStr);
-			response.sendRedirect("WelcomeUser.jsp?uname="+firstnameStr+"");
+			session.setAttribute("uname", usernameStr);
+			response.sendRedirect("WelcomeUser.jsp?uname=" + usernameStr);
 			
 			
 			con.close();
