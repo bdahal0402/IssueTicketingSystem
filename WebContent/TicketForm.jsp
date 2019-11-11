@@ -11,6 +11,22 @@
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<meta charset="ISO-8859-1">
 		<title>Create a Ticket</title>
+		<style>
+			body, html {
+				height: 100%;
+				margin: 0;
+				font-family: Ariel, Helvetica, sans-serif;
+			}
+			.hero-image {
+				background-image: url("https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+				height: 50%;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				positive: relative;
+				opacity: 0.7;
+			}
+		</style>
 		<script>
 			$(document).ready(function() {
 				$("#createTicket").on("submit", function() {
@@ -29,17 +45,31 @@
 		</script>
 	</head>
 	<body>
-		<div class="container">
-			<h1 class="text-center">Create a Ticket</h1>
-			<form class="form_control mt-2" id="createTicket" action="TicketTable.jsp" method="post">
+		<div class="hero-image">
+			<div class="row h-100 justify-content-center align-items-center">
+				<div class="col-12">
+					<%
+						request.getSession(false);
+						if(session == null) {
+							
+						} else {
+							Object name = session.getAttribute("uname");
+					%>
+					<h1 class="text-center" style="color: white;font-size: 45px;">Create a Ticket</h1>
+				</div>
+			</div>
+		</div>	
+		<div class="container mt-5 mb-5">
+			<form class="form_-control mt-2" id="createTicket" action="CreateTicket" method="post">
+				<input type="hidden" value="<%out.println(name.toString()); %>" name="uname" id="uname" />
 				<div class="row">
 					<div class="col-12 col-sm-6">
 						<label>Ticket Name</label>
-						<input type="text" class="form-control" name="_ticket_name" id="ticket_name" required />
+						<input type="text" class="form-control" name="ticketname" id="ticketname" required />
 					</div>
 					<div class="col-12 col-sm-6">
 						<label>Department</label><br />
-						<select class="form_control" name="_department" id="department" required>
+						<select class="form-control" name="department" id="department" required>
 							<option value="">Choose a Department</option>
 							<option value="Technology">Technology</option>
 							<option value="Human Resources">Human Resources</option>
@@ -55,7 +85,7 @@
 				<div class="row pt-3">
 					<div class="col-12 col-sm-6">
 						<label>Assigned To</label><br />
-						<select class="form_control" name="_user" id="user" required>
+						<select class="form-control" name="user" id="user" required>
 							<option value="">Assign to a Staff Member</option>
 							<option value="Zachary Burton">Zachary Burton</option>
 							<option value="Bimal Dahal">Bimal Dahal</option>
@@ -63,7 +93,7 @@
 					</div>
 					<div class="col-12 col-sm-6">
 						<Label>Priority</Label><br />
-						<select class="form_control" name="_priority" id="priority" required>
+						<select class="form-control" name="priority" id="priority" required>
 							<option value="">Choose a Priority</option>
 							<option value="Urgent">Urgent</option>
 							<option value="High">High</option>
@@ -75,16 +105,19 @@
 				<div class="row pt-3">
 					<div class="col-12 col-sm-6">
 						<label>Preferred Completed Date</label>
-						<input type="date" name="date" class="form-control" required />
+						<input type="date" name="date" id="date" class="form-control" required />
 					</div>
 					<div class="col-12 col-sm-6">
 						<Label>Issue Description</Label>
-						<textarea name="_description" class="form-control" required></textarea>
+						<textarea name="description" id="description" class="form-control" required></textarea>
 					</div>
 				</div>
 				<button type="submit" class="form-control btn btn-success mt-3">Create Ticket</button>
 			</form>
 		</div>
+		<%
+			}
+		%>
 		<div id="error"></div>
 	</body>
 </html>
