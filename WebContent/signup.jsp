@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<div class="container mt-5 mb-5">
-			<form method="post" action="SignUp">
+			<form method="post" id="signupform" action="SignUp">
 				<div class="row">
 					<div class="col-12 col-sm-6">
 						<label>First Name</label>
@@ -55,14 +55,16 @@
 					</div>
 					<div class="col-12 col-sm-6">
 						<label>Department</label>
-						<select name="department" class="form-control" required>
-							<option value="0">Choose a Department</option>
+						<select name="department" id="department" class="form-control" required>
+							<option value="">Choose a Department</option>
+							<option value="Administration">Administration</option>
 							<option value="Technology">Technology</option>
 							<option value="Human Resources">Human Resources</option>
 							<option value="Business Services">Business Services</option>
+							<option value="Education">Education</option>
 							<option value="Public Relations">Public Relations</option>
 							<option value="Marketing Department">Marketing Department</option>
-							<option value="Execution">Executive</option>
+							<option value="Executive">Executive</option>
 							<option value="Sales Department">Sales Department</option>
 							<option value="Purchase Department">Purchase Department</option>
 						</select>
@@ -91,5 +93,6 @@
 				<input class="btn btn-success btn-block mt-5" type="submit" value="Sign Up">
 			</form>
 		</div>
+		<div id="error"></div>
 	</body>
 </html>
