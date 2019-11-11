@@ -41,12 +41,20 @@
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
 				<div class="col-12">
+					<%
+						request.getSession(false);
+						if(session == null) {
+							
+						} else {
+							Object name = session.getAttribute("uname");
+					%>
 					<h1 class="text-center" style="color: white;font-size: 45px;">Create an Issue Request</h1>
 				</div>
 			</div>
 		</div>
 		<div class="container mt-5 mb-5">
 			<form class="form_control mt-2" id="createTicket" action="IssueRequest" method="post">
+				<input type="hidden" name="uname" id="uname" value="<%out.println(name.toString()); %>" />
 				<div class="row">
 					<div class="col-12 col-sm-6">
 						<label>Request</label>
@@ -76,6 +84,9 @@
 				<button type="submit" class="form-control btn btn-success mt-3">Create Issue Request</button>
 			</form>
 		</div>
+		<%
+			}
+		%>
 		<div id="error"></div>
 	</body>
 </html>
