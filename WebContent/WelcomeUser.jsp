@@ -91,8 +91,8 @@
 			<div class="row mt-3">
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewAllTickets.jsp" class="btn text-center">
-							View All Tickets
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewAllIssueRequests.jsp" class="btn text-center">
+							View All Issue Requests
 						</a>
 					</div>
 				</div>
