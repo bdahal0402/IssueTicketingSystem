@@ -1,3 +1,5 @@
+package TicketPackage;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -27,7 +29,6 @@ public class SignUp extends HttpServlet implements SetConnection {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		@SuppressWarnings("unused")
 		PrintWriter out = response.getWriter();
 		doGet(request, response);
 		
@@ -52,16 +53,13 @@ public class SignUp extends HttpServlet implements SetConnection {
 			
 			Statement stmt = con.createStatement();
 			
-
-			
-			
 			if(!confirmpasswordStr.equals(passwordStr)) {
 				System.out.println("Your passwords do not match.");
 				return;
 			}
 			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s'",
 					firstnameStr, lastnameStr, emailaddressStr, departmentStr, jobtitleStr, usernameStr, AES.encrypt(passwordStr, "passwordEncryption"));
-			stmt.executeUpdate("INSERT INTO Users(FirstName, "
+			int rows = stmt.executeUpdate("INSERT INTO Users(FirstName, "
 					+ "LastName, "
 					+ "EmailAddress, "
 					+ "Department, "
@@ -69,19 +67,26 @@ public class SignUp extends HttpServlet implements SetConnection {
 					+ "Username,"
 					+ "UserPassword) VALUES (" + values + ")");
 			
-			
-		
-		
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("uname", firstnameStr);
-			response.sendRedirect("WelcomeUser.jsp?uname="+firstnameStr+"");
-			
-			
+			if(rows == 1) {
+				HttpSession session = request.getSession();
+				session.setAttribute("uname", firstnameStr);
+				response.sendRedirect("WelcomeUser.jsp?uname="+firstnameStr+"");
+			} else {
+				response.setContentType("text/html");
+				out.println("<script type=\'text/javascript\'>");
+				out.println("alert('Sign up was not successful. Make sure that the confirm password matches the password you created. ')");
+				out.println("location='signup.js';");
+				out.println("</script>");
+			}
 			con.close();
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean checkEmailAddress(String emailAddress) {
+		return false;
+		
 	}
 }
