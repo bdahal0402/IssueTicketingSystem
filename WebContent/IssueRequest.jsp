@@ -45,7 +45,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container mt-5 mb-5">
 			<form class="form_control mt-2" id="createTicket" action="IssueRequest" method="post">
 				<div class="row">
 					<div class="col-12 col-sm-6">
