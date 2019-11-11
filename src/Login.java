@@ -39,8 +39,6 @@ public class Login extends HttpServlet implements SetConnection {
 		String name = request.getParameter("uname");
 		String pass = request.getParameter("upass");
 		
-		//System.out.println("Name =" + name + "Pass " + pass);
-		
 		Connection con = null;
 		try {
 			try {
@@ -55,6 +53,8 @@ public class Login extends HttpServlet implements SetConnection {
 			Statement stmt = con.createStatement();
 			
 			ResultSet rs2 = stmt.executeQuery("SELECT Username, UserPassword FROM Users WHERE Username = '"+name+"' AND UserPassword = '"+AES.encrypt(pass, "passwordEncryption")+"'   ");
+			
+			//ResultSet FirstName = stmt.executeQuery("SELECT firstname FROM users WHERE username = " + name);
 			
 			if(rs2.next()) {
 				HttpSession session = request.getSession();
