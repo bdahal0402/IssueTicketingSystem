@@ -3,14 +3,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="ISO-8859-1">
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<meta charset="ISO-8859-1">
 		<title>Create an Issue Request</title>
+		<style>
+			body, html {
+				height: 100%;
+				margin: 0;
+				font-family: Ariel, Helvetica, sans-serif;
+			}
+			.hero-image {
+				background-image: url("https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+				height: 50%;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				positon: relative;
+				opacity: 0.7;
+			}
+		</style>
 		<script>
 			$(document).ready(function() {
 				$("#createTicket").on("submit", function() {
@@ -22,8 +38,14 @@
 		</script>
 	</head>
 	<body>
+		<div class="hero-image">
+			<div class="row h-100 justify-content-center align-items-center">
+				<div class="col-12">
+					<h1 class="text-center" style="color: white;font-size: 45px;">Create an Issue Request</h1>
+				</div>
+			</div>
+		</div>
 		<div class="container">
-			<h1 class="text-center">Create an Issue Request</h1>
 			<form class="form_control mt-2" id="createTicket" action="IssueRequest" method="post">
 				<div class="row">
 					<div class="col-12 col-sm-6">
@@ -32,7 +54,7 @@
 					</div>
 					<div class="col-12 col-sm-6">
 						<label>Department</label><br />
-						<select class="form_control" name="department" id="department" required>
+						<select class="form-control" name="department" id="department" required>
 							<option value="">Choose a Department</option>
 							<option value="Technology">Technology</option>
 							<option value="Human Resources">Human Resources</option>
