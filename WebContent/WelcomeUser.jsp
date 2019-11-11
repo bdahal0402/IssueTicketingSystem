@@ -57,15 +57,15 @@
 			<div class="row mt-5">
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/IssueRequest.jsp" class="btn text-center">
-							Create Issue Request
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/IssueRequest.jsp" class="btn text-center p-4">
+							<h5>Create Issue Request</h5>
 						</a>
 					</div>
 				</div>
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/Question.jsp" class="btn text-center">
-							Ask Question to Administrator
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/TicketForm.jsp" class="btn text-center p-4">
+							<h5>Create Ticket</h5>
 						</a>
 					</div>
 				</div>
@@ -73,15 +73,15 @@
 			<div class="row mt-3">
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/DepartmentTickets.jsp" class="btn text-center">
-							View Department Tickets
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/DepartmentTickets.jsp" class="btn text-center p-4">
+							<h5>View Department Requests / Tickets</h5>
 						</a>
 					</div>
 				</div>
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/MyTickets.jsp" class="btn text-center">
-							View My Tickets
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/MyTickets.jsp" class="btn text-center p-4">
+							<h5>View My Requests / Tickets</h5>
 						</a>
 					</div>
 				</div>
@@ -91,11 +91,19 @@
 			<div class="row mt-3">
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewAllIssueRequests.jsp" class="btn text-center">
-							View All Issue Requests
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewAllIssueRequests.jsp" class="btn text-center p-4">
+							<h5>View All Requests / Tickets</h5>
 						</a>
 					</div>
 				</div>
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/Question.jsp" class="btn text-center p-4">
+							<h5>Ask Question to Administrator</h5>
+						</a>
+					</div>
+				</div>
+				<!-- 
 				<div class="col-12 col-sm-6">
 					<div class="card">
 						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/AddTicketAdmin.jsp" class="btn text-center">
@@ -103,7 +111,9 @@
 						</a>
 					</div>
 				</div>
+				-->
 			</div>
+			<!-- 
 			<div class="row mt-3">
 				<div class="col-12 col-sm-6">
 					<div class="card">
@@ -113,6 +123,7 @@
 					</div>
 				</div>
 			</div>
+			-->
 		</div>
 		<div class="container mt-5">
 			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp">Logout</a></button>
