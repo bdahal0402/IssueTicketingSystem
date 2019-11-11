@@ -54,7 +54,11 @@ public class SignUp extends HttpServlet implements SetConnection {
 			Statement stmt = con.createStatement();
 			
 			if(!confirmpasswordStr.equals(passwordStr)) {
-				System.out.println("Your passwords do not match.");
+				response.setContentType("text/html");
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Sign up was not successful. Make sure that the confirm password matches the password you created. ')");
+				out.println("location='signup.js';");
+				out.println("</script>");
 				return;
 			}
 			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s'",
@@ -68,12 +72,13 @@ public class SignUp extends HttpServlet implements SetConnection {
 					+ "UserPassword) VALUES (" + values + ")");
 			
 			if(rows == 1) {
+				System.out.println(rows);
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", firstnameStr);
 				response.sendRedirect("WelcomeUser.jsp?uname="+firstnameStr+"");
 			} else {
 				response.setContentType("text/html");
-				out.println("<script type=\'text/javascript\'>");
+				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Sign up was not successful. Make sure that the confirm password matches the password you created. ')");
 				out.println("location='signup.js';");
 				out.println("</script>");
