@@ -38,18 +38,10 @@
 							
 						} else {
 							String name = request.getParameter("uname"); 
-							if(name == "zach.burton" || name == "cja" || name == "bdahal") {
+							session.setAttribute("uname", name);
 					%>
-					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Administrator Issue Ticketing System</h1>
-					<%
-	  						} else {
-	  				%>
-	  				<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Issue Ticketing System</h1>
+					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Issue Ticketing System</h1>
 	  				<h3 class="text-center" style="font-family: Arial; color: white"><%out.println("Welcome " + name);%></h3>
-	  				<%
-	  						}
-						}
-  					%>
 				</div>
 			</div>
 		</div>
@@ -128,5 +120,8 @@
 		<div class="container mt-5">
 			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp">Logout</a></button>
 		</div>
+		<% 		
+			}
+  		%>
 	</body>
 </html>
