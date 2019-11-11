@@ -57,22 +57,30 @@ public class SignUp extends HttpServlet implements SetConnection {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Sign up was not successful. Make sure that the confirm password matches the password you created. ')");
-				out.println("location='signup.js';");
+				out.println("location='signup.jsp';");
 				out.println("</script>");
 				return;
 			}
 			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s'",
 					firstnameStr, lastnameStr, emailaddressStr, departmentStr, jobtitleStr, usernameStr, AES.encrypt(passwordStr, "passwordEncryption"));
+			
+			int RoleID;
+			if(departmentStr == "Administration") {
+				RoleID = 1; // Administration
+			} else {
+				RoleID = 2; // User
+			}
+			
 			int rows = stmt.executeUpdate("INSERT INTO Users(FirstName, "
 					+ "LastName, "
 					+ "EmailAddress, "
 					+ "Department, "
 					+ "JobTitle,"
 					+ "Username,"
-					+ "UserPassword) VALUES (" + values + ")");
+					+ "UserPassword, "
+					+ "RoleID) VALUES (" + values + ", " + RoleID + ")");
 			
 			if(rows == 1) {
-				System.out.println(rows);
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", firstnameStr);
 				response.sendRedirect("WelcomeUser.jsp?uname="+firstnameStr+"");
@@ -80,7 +88,7 @@ public class SignUp extends HttpServlet implements SetConnection {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Sign up was not successful. Make sure that the confirm password matches the password you created. ')");
-				out.println("location='signup.js';");
+				out.println("location='signup.jsp';");
 				out.println("</script>");
 			}
 			con.close();
