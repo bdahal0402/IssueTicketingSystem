@@ -1,3 +1,5 @@
+package TicketPackage;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -24,6 +26,12 @@ public class Login extends HttpServlet implements SetConnection {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		doGet(request, response);
