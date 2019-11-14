@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="TicketPackage.RecordSet" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -80,6 +84,7 @@
 							<option value="Executive">Executive</option>
 							<option value="Sales Department">Sales Department</option>
 							<option value="Purchase Department">Purchase Department</option>
+							<option value="Maintenance Department">Maintenance Department</option>
 						</select>
 					</div>
 				</div>
@@ -88,8 +93,34 @@
 						<label>Assigned To</label><br />
 						<select class="form-control" name="user" id="user" required>
 							<option value="">Assign to a Staff Member</option>
-							<option value="Zachary Burton">Zachary Burton</option>
-							<option value="Bimal Dahal">Bimal Dahal</option>
+								<%
+								String url = "jdbc:postgresql://ec2-54-235-246-201.compute-1.amazonaws.com/d712a16gfjlf2i";
+								String username = "qpvmvoqkxifbdv";
+								String password = "7bb011180f5880de08fe6c69f68647a5a8409ccc13528729b792dcdee7df9512";
+								Connection con = null;
+								Statement statement = null;
+								try {
+									con = DriverManager.getConnection(url, username, password);
+									statement = con.createStatement();
+								} catch (SQLException e1) {
+									e1.printStackTrace();
+								}
+								ResultSet set = null;
+								List<String> list = null;
+								try {
+									set = statement.executeQuery("SELECT * FROM Users");
+									list = new ArrayList<>();
+									while(set.next()) {	
+								%>
+							<option value="<% out.println(set.getString("lastname")); out.println(set.getString("firstname"));%>">
+								<%
+										out.println(set.getString("firstname")); out.println(set.getString("lastname"));
+									}
+								} catch(SQLException e) {
+									e.printStackTrace();
+								}
+								%>
+							</option>
 						</select>
 					</div>
 					<div class="col-12 col-sm-6">
