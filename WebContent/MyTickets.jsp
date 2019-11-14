@@ -36,10 +36,19 @@
 			</div>
 		</div>
 		<div class="container">
+			<div class="row h-100 justify-content-center align-items-center">
+				<h1 class="text-center" style="color: black;font-size: 45px;">My Tickets</h1>
+			</div>
+		</div>
+		<div class="container">
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
-					
+						<th>Creator</th>
+						<th>Request</th>
+						<th>Description</th>
+						<th>Department</th>
+						<th>Status</th>
 					</thead>
 					<tbody>
 						<tr>
