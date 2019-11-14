@@ -55,6 +55,7 @@
 		<div class="container mt-5 mb-5">
 			<form class="form_control mt-2" id="createTicket" action="IssueRequest" method="post">
 				<input type="hidden" name="uname" id="uname" value="<%out.println(name.toString()); %>" />
+				<input type="hidden" name="status" id="status" value="0" />
 				<div class="row">
 					<div class="col-12 col-sm-6">
 						<label>Request</label>
