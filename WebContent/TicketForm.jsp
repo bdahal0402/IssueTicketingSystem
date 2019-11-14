@@ -62,6 +62,7 @@
 		<div class="container mt-5 mb-5">
 			<form class="form_-control mt-2" id="createTicket" action="CreateTicket" method="post">
 				<input type="hidden" value="<%out.println(name.toString()); %>" name="uname" id="uname" />
+				<input type="hidden" name="status" id="status" value="0" />
 				<div class="row">
 					<div class="col-12 col-sm-6">
 						<label>Ticket Name</label>
@@ -110,6 +111,15 @@
 					<div class="col-12 col-sm-6">
 						<Label>Issue Description</Label>
 						<textarea name="description" id="description" class="form-control" required></textarea>
+					</div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-12 col-sm-12">
+						<label>Ticket for Issue Request</label>
+						<select class="form-control" name="issuerequestid" id="issuerequestid" required>
+							<option value="">Select a Issue Request</option>
+							<option value="10">New Mac Laptop</option>
+						</select>
 					</div>
 				</div>
 				<button type="submit" class="form-control btn btn-success mt-3">Create Ticket</button>
