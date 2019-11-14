@@ -34,6 +34,10 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 		String departmentForm  = request.getParameter("department");
 		String descriptionForm = request.getParameter("description");
 		String userName        = request.getParameter("uname");
+		String Status          = request.getParameter("status");
+		
+		String changedRequest     = requestForm.replace("'", "");
+		String changedDescription = descriptionForm.replace("'", "");
 		
 		Connection con = null;
 		
@@ -48,14 +52,15 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 			
 			Statement stmt = con.createStatement();
 			
-			String values = String.format("'%s', '%s', '%s', '%s'", userName, requestForm, departmentForm, descriptionForm);
+			String values = String.format("'%s', '%s', '%s', '%s', '%s'", userName, changedRequest, departmentForm, changedDescription, Status);
 			
 			System.out.println(values);
 			
 			int rows = stmt.executeUpdate("INSERT INTO issuerequests(username, "
 					+ "request, "
 					+ "department, "
-					+ "description) VALUES (" + values + ")");
+					+ "description, "
+					+ "status) VALUES (" + values + ")");
 			
 			if(rows == 1) {
 				HttpSession session = request.getSession();
@@ -74,5 +79,5 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-;	}
+	}
 }
