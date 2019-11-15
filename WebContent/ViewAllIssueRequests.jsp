@@ -127,17 +127,65 @@
 						<th>Associated Issue Request</th>
 					</thead>
 					<tbody>
+						<%
+							ResultSet resultSet = null;
+							try {
+								resultSet = statement.executeQuery("SELECT * FROM tickets");
+								while(resultSet.next()) {
+						%>
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>
+								<%
+									out.println(resultSet.getString("name"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("department"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("assignedto"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("priority"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("scheduledcompletiondate"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("description"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("createdby"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("status"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("issuerequestid"));
+								%>
+							</td>
 						</tr>
+						<%
+								}
+							} catch (SQLException sqe) {
+								sqe.printStackTrace();
+							}
+						%>
 					</tbody>
 				</table>
 			</div>
