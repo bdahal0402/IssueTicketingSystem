@@ -42,12 +42,12 @@
 		%>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 45px;">My Issue Requests & Tickets</h1>
+				<h1 class="text-center" style="color: black;font-size: 40px;">My Created Issue Requests & Tickets</h1>
 			</div>
 		</div>
 		<div class="container mt-3">
 			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 45px;">My Issue Requests</h1>
+				<h1 class="text-center" style="color: black;font-size: 30px;">My Created Issue Requests</h1>
 			</div>
 		</div>
 		<div class="container-fluid">
@@ -117,7 +117,7 @@
 		</div>
 		<div class="container mt-3">
 			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 45px;">My Tickets</h1>
+				<h1 class="text-center" style="color: black;font-size: 30px;">My Created Tickets</h1>
 			</div>
 		</div>
 		<div class="container-fluid">
