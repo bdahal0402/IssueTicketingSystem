@@ -29,17 +29,28 @@
 		</style>
 	</head>
 	<body>
+		<%
+			request.getSession(false);
+			if(session == null) {
+				
+			} else {
+				String name = request.getParameter("uname"); 
+				session.setAttribute("uname", name);
+		%>
+		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+		  <ul class="navbar-nav">
+		    <li class="nav-item active">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Requests / Tickets</a>
+		    </li>
+		  </ul>
+		</nav>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
   				<div class="col-12">
-  					<%
-	  					request.getSession(false);
-						if(session == null) {
-							
-						} else {
-							String name = request.getParameter("uname"); 
-							session.setAttribute("uname", name);
-					%>
+
 					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Issue Ticketing System</h1>
 	  				<h3 class="text-center" style="font-family: Arial; color: white"><%out.println("Welcome " + name);%></h3>
 				</div>
