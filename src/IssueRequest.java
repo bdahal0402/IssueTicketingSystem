@@ -63,7 +63,7 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 			if(rows == 1) {
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", userName);
-				response.sendRedirect("WelcomeUser.jsp?uname="+userName+"");
+				response.sendRedirect("WelcomeUser.jsp");
 			} else {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
