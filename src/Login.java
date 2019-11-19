@@ -21,6 +21,9 @@ import java.sql.*;
 @WebServlet("/Login")
 public class Login extends HttpServlet implements SetConnection {
 	@SuppressWarnings("unused")
+	
+	private int roleID = 0;
+
 	private static final long serialIDVersion = 1L;
 	
 	/**
@@ -50,7 +53,7 @@ public class Login extends HttpServlet implements SetConnection {
 			con = DriverManager.getConnection(url, username, password);
 			//System.out.println("DB connected successfully!");
 			
-			String query = "SELECT username, userPassword FROM users WHERE username = ? AND userpassword = ?;";
+			String query = "SELECT roleid, username, userPassword FROM users WHERE username = ? AND userpassword = ?;";
 			PreparedStatement stmt = con.prepareStatement(
 					query);
 			stmt.setString(1, name);
@@ -61,7 +64,7 @@ public class Login extends HttpServlet implements SetConnection {
 			if(rs2.next()) {
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", name);
-				response.sendRedirect("WelcomeUser.jsp?uname=" + name);
+				response.sendRedirect("WelcomeUser.jsp");
 			} else {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
@@ -74,4 +77,12 @@ public class Login extends HttpServlet implements SetConnection {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setRoleID(int rID) {
+		roleID = rID;
+	}
+	public int getRoleID() {
+		return roleID;
+	}
+	
 }
