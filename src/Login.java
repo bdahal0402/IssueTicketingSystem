@@ -50,11 +50,13 @@ public class Login extends HttpServlet implements SetConnection {
 			con = DriverManager.getConnection(url, username, password);
 			//System.out.println("DB connected successfully!");
 			
-			Statement stmt = con.createStatement();
-			
-			ResultSet rs2 = stmt.executeQuery("SELECT Username, UserPassword FROM Users WHERE Username = '"+name+"' AND UserPassword = '"+AES.encrypt(pass, "passwordEncryption")+"'   ");
-			
-			//ResultSet FirstName = stmt.executeQuery("SELECT firstname FROM users WHERE username = " + name);
+			String query = "SELECT username, userPassword FROM users WHERE username = ? AND userpassword = ?;";
+			PreparedStatement stmt = con.prepareStatement(
+					query);
+			stmt.setString(1, name);
+			stmt.setString(2, AES.encrypt(pass, "passwordEncryption"));
+
+	        	ResultSet rs2 = stmt.executeQuery();
 			
 			if(rs2.next()) {
 				HttpSession session = request.getSession();
