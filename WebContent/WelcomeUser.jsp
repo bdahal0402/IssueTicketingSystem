@@ -33,13 +33,12 @@
 	</head>
 	<body>
 		<%
-		
-		String userName = request.getParameter("uname"); 
+		String userName = session.getAttribute("uname").toString();
 		session.setAttribute("uname", userName);
 		
 		String myfirstname = "";
 		String mylastname = "";
-			
+		int roleid = 0;			
 		
 		request.getSession(false);
 			if(session == null) {
@@ -62,7 +61,8 @@
 					while(set.next()) {
 						myfirstname = set.getString("firstname");
 						mylastname = set.getString("lastname");
-						
+						roleid = set.getInt("roleid");
+						session.setAttribute("roleid", roleid);
 					}
 			} catch (SQLException sqe) {
 				sqe.printStackTrace();
@@ -100,22 +100,6 @@
 				</div>
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/TicketForm.jsp" class="btn text-center p-4">
-							<h5>Create Ticket</h5>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="row mt-3">
-				<div class="col-12 col-sm-6">
-					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/DepartmentTickets.jsp" class="btn text-center p-4">
-							<h5>View Department Requests / Tickets</h5>
-						</a>
-					</div>
-				</div>
-				<div class="col-12 col-sm-6">
-					<div class="card">
 						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/MyTickets.jsp" class="btn text-center p-4">
 							<h5>View My Requests / Tickets</h5>
 						</a>
@@ -127,8 +111,8 @@
 			<div class="row mt-3">
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewAllIssueRequests.jsp" class="btn text-center p-4">
-							<h5>View All Requests / Tickets</h5>
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/DepartmentTickets.jsp" class="btn text-center p-4">
+							<h5>View Department Requests / Tickets</h5>
 						</a>
 					</div>
 				</div>
@@ -139,28 +123,32 @@
 						</a>
 					</div>
 				</div>
-				<!-- 
-				<div class="col-12 col-sm-6">
-					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/AddTicketAdmin.jsp" class="btn text-center">
-							Add Ticket
-						</a>
-					</div>
-				</div>
-				-->
 			</div>
-			<!-- 
+		</div>
+		<%
+			if(roleid == 1){
+		%>
+		<div class="container">
 			<div class="row mt-3">
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/AddIssues.jsp" class="btn text-center">
-							Add Issues
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/TicketForm.jsp" class="btn text-center p-4">
+							<h5>Create Ticket</h5>
+						</a>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewAllIssueRequests.jsp" class="btn text-center p-4">
+							<h5>View All Requests / Tickets</h5>
 						</a>
 					</div>
 				</div>
 			</div>
-			-->
 		</div>
+		<%
+			}
+		%>
 		<div class="container mt-5">
 			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp">Logout</a></button>
 		</div>
