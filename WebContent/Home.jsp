@@ -43,14 +43,14 @@
 			<div class="row mt-5">
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/IssueTicketing/login.jsp" class="btn text-center">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/login.jsp" class="btn text-center">
 							Login
 						</a>
 					</div>
 				</div>
 				<div class="col-12 col-sm-6">
 					<div class="card">
-						<a href="http://localhost:8080/IssueTicketing/signup.jsp" class="btn text-center">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/signup.jsp" class="btn text-center">
 							Sign Up
 						</a>
 					</div>
