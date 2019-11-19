@@ -34,11 +34,11 @@
 		</head>
 	<body>
 		<%
-			request.getSession(false);
-		    if(session == null) {
-		    	
-		    } else {
-		    	Object name = session.getAttribute("uname");
+		if(session.getAttribute("uname") == null){
+			response.sendRedirect("Home.jsp");
+		}
+		else{
+		    	String name = session.getAttribute("uname").toString();
 		%>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
@@ -203,6 +203,9 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+		<div class="container mt-5">
+			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
 		</div>
 		<%
 								}

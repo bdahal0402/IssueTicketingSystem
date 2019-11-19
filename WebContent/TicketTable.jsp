@@ -2,6 +2,10 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+<%if(session.getAttribute("uname") == null){
+	response.sendRedirect("Home.jsp");
+}
+else{ %>
 	<head>
 		<meta charset="ISO-8859-1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -80,5 +84,9 @@
 				</table>
 			</div>
 		</div>
+		<div class="container mt-5">
+			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
+		</div>
 	</body>
+	<% } %>
 </html>

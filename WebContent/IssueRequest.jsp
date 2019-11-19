@@ -2,6 +2,11 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+<% if(session.getAttribute("uname") == null){
+			response.sendRedirect("Home.jsp");
+		}
+		else{
+			%>
 	<head>
 		<meta charset="ISO-8859-1">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -46,7 +51,7 @@
 						if(session == null) {
 							
 						} else {
-							Object name = session.getAttribute("uname");
+							String name = session.getAttribute("uname").toString();
 					%>
 					<h1 class="text-center" style="color: white;font-size: 45px;">Create an Issue Request</h1>
 				</div>
@@ -89,5 +94,11 @@
 			}
 		%>
 		<div id="error"></div>
+		<div class="container mt-5">
+			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
+		</div>
 	</body>
+	<% }
+	%>
+	
 </html>

@@ -5,6 +5,10 @@
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
+<%if(session.getAttribute("uname") == null){
+	response.sendRedirect("Home.jsp");
+}
+else{ %>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -56,7 +60,7 @@
 						if(session == null) {
 							
 						} else {
-							Object name = session.getAttribute("uname");
+							String name = session.getAttribute("uname").toString();
 					%>
 					<h1 class="text-center" style="color: white;font-size: 45px;">Create a Ticket</h1>
 				</div>
@@ -153,8 +157,12 @@
 				<button type="submit" class="form-control btn btn-success mt-3">Create Ticket</button>
 			</form>
 		</div>
+		<div class="container mt-5">
+			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
+		</div>
 		<%
 			}
+}
 		%>
 		<div id="error"></div>
 	</body>
