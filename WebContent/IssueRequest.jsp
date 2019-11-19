@@ -65,9 +65,11 @@
 						<label>Department</label><br />
 						<select class="form-control" name="department" id="department" required>
 							<option value="">Choose a Department</option>
+							<option value="Administration">Administration</option>
 							<option value="Technology">Technology</option>
 							<option value="Human Resources">Human Resources</option>
 							<option value="Business Services">Business Services</option>
+							<option value="Education">Education</option>
 							<option value="Public Relations">Public Relations</option>
 							<option value="Marketing Department">Marketing Department</option>
 							<option value="Executive">Executive</option>
