@@ -81,7 +81,7 @@ public class SignUp extends HttpServlet implements SetConnection {
 			if(rows == 1) {
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", usernameStr);
-				response.sendRedirect("WelcomeUser.jsp?uname="+usernameStr+"");
+				response.sendRedirect("WelcomeUser.jsp");
 			} else {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
