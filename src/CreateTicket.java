@@ -1,5 +1,3 @@
-package TicketPackage;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -87,4 +85,3 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 		}
 ;	}
 }
-
