@@ -33,6 +33,11 @@
 	</head>
 	<body>
 		<%
+		if(session.getAttribute("uname") == null){
+			response.sendRedirect("Home.jsp");
+		}
+		else{
+		
 		String userName = session.getAttribute("uname").toString();
 		session.setAttribute("uname", userName);
 		
@@ -68,7 +73,7 @@
 				sqe.printStackTrace();
 			}
 				
-				
+			
 		%>
 		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
 		  <ul class="navbar-nav">
@@ -150,10 +155,11 @@
 			}
 		%>
 		<div class="container mt-5">
-			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/logout.jsp">Logout</a></button>
+			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
 		</div>
 		<% 		
 			}
+		}
   		%>
 	</body>
 </html>

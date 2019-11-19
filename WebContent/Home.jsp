@@ -31,6 +31,7 @@
 		</style>
 	</head>
 	<body>
+	<%session.invalidate(); %>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
   				<div class="col-12">

@@ -63,7 +63,7 @@
 			</div>
 		</div>	
 		<div class="container mt-5 mb-5">
-			<form class="mt-2" id="createTicket" action="CreateTicket" method="post">
+			<form class="form_-control mt-2" id="createTicket" action="CreateTicket" method="post">
 				<input type="hidden" value="<%out.println(name.toString()); %>" name="uname" id="uname" />
 				<input type="hidden" name="status" id="status" value="0" />
 				<div class="row">
@@ -72,19 +72,18 @@
 						<input type="text" class="form-control" name="ticketname" id="ticketname" required />
 					</div>
 					<div class="col-12 col-sm-6">
-						<label>Department</label>
+						<label>Department</label><br />
 						<select class="form-control" name="department" id="department" required>
 							<option value="">Choose a Department</option>
-							<option value="Administration">Administration</option>
 							<option value="Technology">Technology</option>
 							<option value="Human Resources">Human Resources</option>
 							<option value="Business Services">Business Services</option>
-							<option value="Education">Education</option>
 							<option value="Public Relations">Public Relations</option>
 							<option value="Marketing Department">Marketing Department</option>
 							<option value="Executive">Executive</option>
 							<option value="Sales Department">Sales Department</option>
 							<option value="Purchase Department">Purchase Department</option>
+							<option value="Maintenance Department">Maintenance Department</option>
 						</select>
 					</div>
 				</div>
