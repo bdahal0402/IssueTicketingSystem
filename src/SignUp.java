@@ -1,5 +1,3 @@
-package TicketPackage;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -82,8 +80,8 @@ public class SignUp extends HttpServlet implements SetConnection {
 			
 			if(rows == 1) {
 				HttpSession session = request.getSession();
-				session.setAttribute("uname", firstnameStr);
-				response.sendRedirect("WelcomeUser.jsp?uname="+firstnameStr+"");
+				session.setAttribute("uname", usernameStr);
+				response.sendRedirect("WelcomeUser.jsp?uname="+usernameStr+"");
 			} else {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
