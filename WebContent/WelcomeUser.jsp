@@ -82,7 +82,7 @@
   				<div class="col-12">
 
 					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Issue Ticketing System</h1>
-	  				<h3 class="text-center" style="font-family: Arial; color: white"><%out.println("Welcome " + userName);%></h3>
+	  				<h3 class="text-center" style="font-family: Arial; color: white"><%out.println("Welcome " + myname);%></h3>
 				</div>
 			</div>
 		</div>
