@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -30,12 +33,39 @@
 	</head>
 	<body>
 		<%
-			request.getSession(false);
+		
+		String userName = request.getParameter("uname"); 
+		session.setAttribute("uname", userName);
+		
+		String myname = "";
+			
+		
+		request.getSession(false);
 			if(session == null) {
 				
 			} else {
-				String name = request.getParameter("uname"); 
-				session.setAttribute("uname", name);
+				String url = "jdbc:postgresql://ec2-54-235-246-201.compute-1.amazonaws.com/d712a16gfjlf2i";
+				String username = "qpvmvoqkxifbdv";
+				String password = "7bb011180f5880de08fe6c69f68647a5a8409ccc13528729b792dcdee7df9512";
+				Connection con = null;
+				Statement statement = null;
+				try {
+					con = DriverManager.getConnection(url, username, password);
+					statement = con.createStatement();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				ResultSet set = null;
+				try {
+					set = statement.executeQuery("SELECT * FROM users WHERE username = '" + userName + "'");
+					while(set.next()) {
+						myname = set.getString("firstname");
+					}
+			} catch (SQLException sqe) {
+				sqe.printStackTrace();
+			}
+				
+				
 		%>
 		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
 		  <ul class="navbar-nav">
@@ -52,7 +82,7 @@
   				<div class="col-12">
 
 					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Issue Ticketing System</h1>
-	  				<h3 class="text-center" style="font-family: Arial; color: white"><%out.println("Welcome " + name);%></h3>
+	  				<h3 class="text-center" style="font-family: Arial; color: white"><%out.println("Welcome " + userName);%></h3>
 				</div>
 			</div>
 		</div>
