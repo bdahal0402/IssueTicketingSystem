@@ -51,9 +51,7 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 			Statement stmt = con.createStatement();
 			
 			String values = String.format("'%s', '%s', '%s', '%s', '%s'", userName, changedRequest, departmentForm, changedDescription, Status);
-			
-			System.out.println(values);
-			
+						
 			int rows = stmt.executeUpdate("INSERT INTO issuerequests(username, "
 					+ "request, "
 					+ "department, "
@@ -61,8 +59,6 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 					+ "status) VALUES (" + values + ")");
 			
 			if(rows == 1) {
-				HttpSession session = request.getSession();
-				session.setAttribute("uname", userName);
 				response.sendRedirect("WelcomeUser.jsp");
 			} else {
 				response.setContentType("text/html");

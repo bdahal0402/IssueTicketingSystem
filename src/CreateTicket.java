@@ -67,9 +67,7 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 					+ "issuerequestid) VALUES (" + values + ")");
 			
 			if(rows == 1) {
-				HttpSession session = request.getSession();
-				session.setAttribute("uname", CreatedBy);
-				response.sendRedirect("WelcomeUser.jsp?uname=" + CreatedBy + "");
+				response.sendRedirect("WelcomeUser.jsp");
 			} else {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
