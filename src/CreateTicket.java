@@ -1,3 +1,5 @@
+package TicketPackage;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -67,7 +69,11 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 					+ "issuerequestid) VALUES (" + values + ")");
 			
 			if(rows == 1) {
-				response.sendRedirect("WelcomeUser.jsp");
+				response.setContentType("text/html");
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('The ticket was recorded.')");
+				out.println("location='WelcomeUser.jsp';");
+				out.println("</script>");
 			} else {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
