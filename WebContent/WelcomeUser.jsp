@@ -33,20 +33,18 @@
 	</head>
 	<body>
 		<%
-		if(session.getAttribute("uname") == null){
-			response.sendRedirect("Home.jsp");
-		}
-		else{
-		
+			if(session.getAttribute("uname") == null){
+				response.sendRedirect("Home.jsp");
+			} else {
+				
+			String userName = session.getAttribute("uname").toString();
+			session.setAttribute("uname", userName);
 			
-		String userName = session.getAttribute("uname").toString();
-		session.setAttribute("uname", userName);
-		
-		String myfirstname = "";
-		String mylastname = "";
-		int roleid = 0;			
-		
-		request.getSession(false);
+			String myfirstname = "";
+			String mylastname = "";
+			int roleid = 0;			
+			
+			request.getSession(false);
 			if(session == null) {
 				
 			} else {
@@ -70,11 +68,9 @@
 						roleid = set.getInt("roleid");
 						session.setAttribute("roleid", roleid);
 					}
-			} catch (SQLException sqe) {
-				sqe.printStackTrace();
-			}
-				
-			
+				} catch (SQLException sqe) {
+					sqe.printStackTrace();
+				}
 		%>
 		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
 		  <ul class="navbar-nav">
@@ -107,7 +103,7 @@
 				<div class="col-12 col-sm-6">
 					<div class="card">
 						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/MyTickets.jsp" class="btn text-center p-4">
-							<h5>View My Requests / Tickets</h5>
+							<h5>View My Requests<%if(roleid == 1) { %> / Tickets<%} %></h5>
 						</a>
 					</div>
 				</div>
@@ -118,7 +114,7 @@
 				<div class="col-12 col-sm-6">
 					<div class="card">
 						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/DepartmentTickets.jsp" class="btn text-center p-4">
-							<h5>View Department Requests / Tickets</h5>
+							<h5>View Department Requests<%if(roleid == 1){ %> / Tickets<%} %></h5>
 						</a>
 					</div>
 				</div>
