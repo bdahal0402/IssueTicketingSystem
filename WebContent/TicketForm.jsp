@@ -5,10 +5,6 @@
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
-<%if(session.getAttribute("uname") == null){
-	response.sendRedirect("Home.jsp");
-}
-else{ %>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -60,7 +56,12 @@ else{ %>
 						if(session == null) {
 							
 						} else {
-							String name = session.getAttribute("uname").toString();
+							Object name = session.getAttribute("uname");
+							String url = "jdbc:postgresql://ec2-54-235-246-201.compute-1.amazonaws.com/d712a16gfjlf2i";
+							String username = "qpvmvoqkxifbdv";
+							String password = "7bb011180f5880de08fe6c69f68647a5a8409ccc13528729b792dcdee7df9512";
+							Connection con = null;
+							Statement statement = null;
 					%>
 					<h1 class="text-center" style="color: white;font-size: 45px;">Create a Ticket</h1>
 				</div>
@@ -79,15 +80,16 @@ else{ %>
 						<label>Department</label><br />
 						<select class="form-control" name="department" id="department" required>
 							<option value="">Choose a Department</option>
+							<option value="Administration">Administration</option>
 							<option value="Technology">Technology</option>
 							<option value="Human Resources">Human Resources</option>
 							<option value="Business Services">Business Services</option>
+							<option value="Education">Education</option>
 							<option value="Public Relations">Public Relations</option>
 							<option value="Marketing Department">Marketing Department</option>
 							<option value="Executive">Executive</option>
 							<option value="Sales Department">Sales Department</option>
 							<option value="Purchase Department">Purchase Department</option>
-							<option value="Maintenance Department">Maintenance Department</option>
 						</select>
 					</div>
 				</div>
@@ -97,11 +99,6 @@ else{ %>
 						<select class="form-control" name="user" id="user" required>
 							<option value="">Assign to a Staff Member</option>
 								<%
-									String url = "jdbc:postgresql://ec2-54-235-246-201.compute-1.amazonaws.com/d712a16gfjlf2i";
-									String username = "qpvmvoqkxifbdv";
-									String password = "7bb011180f5880de08fe6c69f68647a5a8409ccc13528729b792dcdee7df9512";
-									Connection con = null;
-									Statement statement = null;
 									try {
 										con = DriverManager.getConnection(url, username, password);
 										statement = con.createStatement();
@@ -150,19 +147,29 @@ else{ %>
 						<label>Ticket for Issue Request</label>
 						<select class="form-control" name="issuerequestid" id="issuerequestid" required>
 							<option value="">Select a Issue Request</option>
-							<option value="10">New Mac Laptop</option>
+							<%
+								ResultSet setTicketName = null;
+								try {
+									setTicketName = statement.executeQuery("SELECT id, request FROM issuerequests WHERE status = '0'");
+									while(setTicketName.next()) {
+							%>
+							<option value="<%out.println(setTicketName.getString("request"));%>">
+							<%out.println(setTicketName.getString("request"));%>
+								<%
+										}
+									} catch (SQLException e) {
+										e.printStackTrace();
+									}
+								%>
+							</option>
 						</select>
 					</div>
 				</div>
 				<button type="submit" class="form-control btn btn-success mt-3">Create Ticket</button>
 			</form>
 		</div>
-		<div class="container mt-5">
-			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
-		</div>
 		<%
 			}
-}
 		%>
 		<div id="error"></div>
 	</body>
