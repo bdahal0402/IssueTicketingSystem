@@ -1,3 +1,5 @@
+package TicketPackage;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -51,7 +53,9 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 			Statement stmt = con.createStatement();
 			
 			String values = String.format("'%s', '%s', '%s', '%s', '%s'", userName, changedRequest, departmentForm, changedDescription, Status);
-						
+			
+			System.out.println(values);
+			
 			int rows = stmt.executeUpdate("INSERT INTO issuerequests(username, "
 					+ "request, "
 					+ "department, "
@@ -59,7 +63,11 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 					+ "status) VALUES (" + values + ")");
 			
 			if(rows == 1) {
-				response.sendRedirect("WelcomeUser.jsp");
+				response.setContentType("text/html");
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('The issue request was recorded.')");
+				out.println("location='WelcomeUser.jsp';");
+				out.println("</script>");
 			} else {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
