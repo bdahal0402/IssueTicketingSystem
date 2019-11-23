@@ -68,7 +68,7 @@
 		%>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 40px;">Created Issue Requests & Tickets by Department</h1>
+				<h1 class="text-center" style="color: black;font-size: 40px;">Created Issue Requests <%if(roleid == 1) {%>& Tickets <%} %>by Department</h1>
 			</div>
 		</div>
 		<div class="container mt-3">
