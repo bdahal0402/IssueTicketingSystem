@@ -34,11 +34,11 @@
 		</head>
 	<body>
 		<%
-		if(session.getAttribute("uname") == null){
-			response.sendRedirect("Home.jsp");
-		}
-		else{
-		    	String name = session.getAttribute("uname").toString();
+			request.getSession(false);
+		    if(session == null) {
+		    	
+		    } else {
+		    	Object name = session.getAttribute("uname");
 		%>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
@@ -77,6 +77,7 @@
 							try {
 								set = statement.executeQuery("SELECT * FROM issuerequests WHERE username LIKE '%" + name + "%'");
 								while(set.next()) {
+									String status = set.getString("status");
 						%>
 						<tr>
 							<td>
@@ -101,7 +102,11 @@
 							</td>
 							<td>
 								<%
-									out.println(set.getString("status"));
+									if(Integer.parseInt(status) == 0) {
+										out.println("Not Completed");
+									} else {
+										out.println("Completed");
+									}
 								%>
 							</td>
 						</tr>
@@ -145,7 +150,8 @@
 							ResultSet resultSet = null;
 							try {
 								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE createdby LIKE '%" + name + "%'");
-								while(resultSet.next()) {	
+								while(resultSet.next()) {
+									String status = resultSet.getString("status");
 						%>
 						<tr>
 							<td>
@@ -185,7 +191,11 @@
 							</td>
 							<td>
 								<%
-									out.println(resultSet.getString("status"));
+									if(Integer.parseInt(status) == 0) {
+										out.println("Not Completed");
+									} else {
+										out.println("Completed");
+									}
 								%>
 							</td>
 							<td>
@@ -203,9 +213,6 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
-		<div class="container mt-5">
-			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
 		</div>
 		<%
 								}
