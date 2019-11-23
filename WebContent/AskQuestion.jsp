@@ -22,8 +22,10 @@ else{ %>
 				margin: 0;
 				font-family: Ariel, Helvetica, sans-serif;
 			}
+			
 			.hero-image {
-				background-image: url("https://images.unsplash.com/photo-1557318041-1ce374d55ebf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80");
+				background-image: url("https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+				height: 50%;
 				background-position: center;
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -35,19 +37,25 @@ else{ %>
 	<body>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 45px;">Ask a Question</h1>
+				<h1 class="text-center" style="color: black;font-size: 40px;">Ask a Question</h1>
 			</div>
 		</div>
-				<form id="askQuestion" action= "AskQuestion" method="post">
-				Email: <input type="email" id="email" name="email"><br>
-  			Question: <input type="text" id="message" name="message"><br>
-  			<input type="Submit" value = "Submit Question">
-		</form>
+		<div class="container mt-5 mb-5">
+			<form id="askQuestion" action="AskQuestion" method="post">
+				<div class="row">
+					<div class="col-12 col-sm-6">
+						Email: <input type="email" class="form-control" id="email" name="email" required>
+					</div>
+					<div class="col-12 col-sm-6">
+						Question: <textarea rows="4" class="form-control" id="message" name="message" required></textarea>
+					</div>
+				</div>
+	 			<input type="submit" class="btn-success form-control mt-4" value="Submit Question">
+			</form>
+		</div>
 		<div class="container mt-5">
 			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
 		</div>
-		
-
 	</body>
 	<%} %>
 </html>
