@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 @SuppressWarnings("serial")
@@ -46,26 +45,25 @@ public class AskQuestion extends HttpServlet implements SetConnection {
 			con = DriverManager.getConnection(url, username, password);
 			
 			String query = "INSERT INTO questions (email, question) values (?,?);";
-			PreparedStatement stmt = con.prepareStatement(
-					query);
+			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setString(1, email);
 			stmt.setString(2, message);
 
 			int result = stmt.executeUpdate();
-			if (result >0) {
-				response.sendRedirect("WelcomeUser.jsp");
+			if (result > 0) {
+				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('The question was sent succesfully, you will get a response in your email!. ')");
 				out.println("location='WelcomeUser.jsp';");
 				out.println("</script>");
-			}
-			else {
-				response.sendRedirect("AskQuestion.jsp");
-				
+			} else {
+				response.setContentType("text/html");
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('The question could not be created.')");
+				out.println("location='AskQuestion.jsp';");
+				out.println("</script>");
 			}
 	
-		
-			
 			con.close();
 			
 		} catch (SQLException e) {
