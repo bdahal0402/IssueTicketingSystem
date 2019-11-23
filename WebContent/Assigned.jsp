@@ -114,6 +114,7 @@
 							try {
 								String fullname = myFirstname + " " + myLastname;
 								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';");
+								int i = 0;
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>
@@ -174,7 +175,7 @@
 										}
 										%>
 									</select>
-									<button class="btn-success form-control mt-2" type="submit">Update</button>
+									<button class="btn-success form-control mt-2" name="buttonVal"  value="<%out.println(resultSet.getString("id")); %>" type="submit">Update</button>
 								</form>
 							</td>
 						</tr>
