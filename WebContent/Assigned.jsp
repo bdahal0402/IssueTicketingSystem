@@ -13,7 +13,7 @@
 	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<title>Assigned Tickets</title>
+		<title>Assigned Issue Requests and Tickets</title>
 		<style>
 			body, html {
 				height: 100%;
@@ -38,7 +38,7 @@
 		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
 		    </li>
 		    <li class="nav-item active">
-		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Requests / Tickets</a>
 		    </li>
 		  </ul>
 		</nav>
@@ -83,22 +83,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="container mt-3">
-			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 30px;">Assigned Tickets</h1>
-			</div>
-		</div>
-		<div class="container-fluid">
+		<div class="container-fluid mt-3">
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 						<th>Name</th>
 						<th>Department</th>
-						<th>Assigned To</th>
+						<th>Assigned</th>
 						<th>Priority</th>
-						<th>Scheduled Completion Date</th>
+						<th>Completion Date</th>
 						<th>Description</th>
-						<th>Created By</th>
+						<th>Creator</th>
 						<th>Issue Request</th>
 						<th>Status</th>
 					</thead>
@@ -118,8 +113,7 @@
 							ResultSet resultSet = null;
 							try {
 								String fullname = myFirstname + " " + myLastname;
-								
-								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';"); 
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';");
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>
@@ -165,38 +159,23 @@
 								%>
 							</td>
 							<td>
-								<script>
-			$(document).ready(function() {
-				$(".status").on("change", function() {
-					var ticketid = $(".status").attr('data-id');
-					console.log(ticketid);
-					var selection = $(".status").val();
-					$.ajax({
-						type: 'post',
-						url: 'UpdateTicket.java',
-						data: {
-							selection: selection,
-							ticketid: ticketid
-						}
-					});
-				});
-			});
-		</script>
-								<!--<form method="post" action="UpdateTicket">-->
-									<select class="form-control status" name="_status" data-id="<%out.println(resultSet.getString("id"));%>" required>
+								<form action="UpdateTicket" method="post">
+									<input type="hidden" id="ticketid" name="ticketid" value="<%out.println(resultSet.getString("id")); %>" />
+									<select class="form-control" id="status" name="status" required>
 										<%
 										if(Integer.parseInt(status) == 0) { %>
-											<option value="NotCompleted"><% out.println("Not Completed"); %></option>
+											<option value="NotCompleted" selected><% out.println("Not Completed"); %></option>
 											<option value="Completed"><% out.println("Completed"); %></option>
 											<% 
 										} else { %>
-											<option value="Completed"><% out.println("Completed"); %></option>
+											<option value="Completed" selected><% out.println("Completed"); %></option>
 											<option value="NotCompleted"><% out.println("Not Completed"); %></option> 
 											<% 
 										}
 										%>
 									</select>
-								<!--</form>-->
+									<button class="btn-success form-control mt-2" type="submit">Update</button>
+								</form>
 							</td>
 						</tr>
 						<%
