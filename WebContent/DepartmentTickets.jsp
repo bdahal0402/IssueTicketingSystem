@@ -103,6 +103,7 @@
 							try {
 								set = statement.executeQuery("SELECT * FROM issuerequests WHERE department IN (SELECT department FROM users WHERE username LIKE '%" + name + "%')");
 								while(set.next()) {
+									String status = set.getString("status");
 						%>
 						<tr>
 							<td>
@@ -127,7 +128,11 @@
 							</td>
 							<td>
 								<%
-									out.println(set.getString("status"));
+									if(Integer.parseInt(status) == 0) {
+										out.println("Not Completed");
+									} else {
+										out.println("Completed");
+									}
 								%>
 							</td>
 						</tr>
@@ -173,6 +178,7 @@
 							try {
 								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE department IN (SELECT department FROM users WHERE username LIKE '%" + name + "%')");
 								while(resultSet.next()) {	
+									String status = resultSet.getString("status");
 						%>
 						<tr>
 							<td>
@@ -212,7 +218,11 @@
 							</td>
 							<td>
 								<%
-									out.println(resultSet.getString("status"));
+									if(Integer.parseInt(status) == 0) {
+										out.println("Not Completed");
+									} else {
+										out.println("Completed");
+									}
 								%>
 							</td>
 							<td>
