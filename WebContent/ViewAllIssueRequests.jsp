@@ -5,10 +5,6 @@
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
-<% if(session.getAttribute("uname") == null){
-	response.sendRedirect("Home.jsp");
-}
-else{ %>
 	<head>
 		<meta charset="ISO-8859-1">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -73,6 +69,7 @@ else{ %>
 							try {
 								set = statement.executeQuery("SELECT * FROM issuerequests");
 								while(set.next()) {
+									String status = set.getString("status");
 						%>
 						<tr>
 							<td>
@@ -97,7 +94,11 @@ else{ %>
 							</td>
 							<td>
 								<%
-									out.println(set.getString("status"));
+									if(Integer.parseInt(status) == 0) {
+										out.println("Not Completed");
+									} else {
+										out.println("Completed");
+									}
 								%>
 							</td>
 						</tr>
@@ -136,6 +137,7 @@ else{ %>
 							try {
 								resultSet = statement.executeQuery("SELECT * FROM tickets");
 								while(resultSet.next()) {
+									String status = resultSet.getString("status");
 						%>
 						<tr>
 							<td>
@@ -175,7 +177,11 @@ else{ %>
 							</td>
 							<td>
 								<%
-									out.println(resultSet.getString("status"));
+									if(Integer.parseInt(status) == 0) {
+										out.println("Not Completed");
+									} else {
+										out.println("Completed");
+									}
 								%>
 							</td>
 							<td>
@@ -194,9 +200,5 @@ else{ %>
 				</table>
 			</div>
 		</div>
-		<div class="container mt-5">
-			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
-		</div>
 	</body>
-	<% } %>
 </html>
