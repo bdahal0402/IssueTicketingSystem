@@ -1,5 +1,3 @@
-package TicketPackage;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -28,7 +26,7 @@ public class UpdateTicket extends HttpServlet implements SetConnection {
 		PrintWriter out = response.getWriter();
 		doGet(request, response);
 		
-		String ticketid = request.getParameter("ticketid");
+		String ticketid = request.getParameter("buttonVal");
 		String status   = request.getParameter("status");
 		
 		Connection con = null;
@@ -45,15 +43,18 @@ public class UpdateTicket extends HttpServlet implements SetConnection {
 			Statement stmt = con.createStatement();
 			
 			String values = String.format("'%s', '%s'", ticketid, status);
-			
-			System.out.println(values);
-			
-			int rows = stmt.executeUpdate("UPDATE tickets SET status = '1' WHERE id = " + ticketid);
-			
+			int rows;
+			if (status.toLowerCase().contains("not")) {
+				rows = stmt.executeUpdate("UPDATE tickets SET status = '0' WHERE id = " + ticketid);
+				status = "Not completed";
+			}
+			else
+				rows = stmt.executeUpdate("UPDATE tickets SET status = '1' WHERE id = " + ticketid);
+
 			if(rows == 1) {
 				response.setContentType("text/html");
 				out.println("<script type=\"text/javascript\">");
-				out.println("alert('The ticket has been completed. ')");
+				out.println("alert('The ticket has been updated to: " + status +"')");
 				out.println("location='Assigned.jsp';");
 				out.println("</script>");
 			} else {
