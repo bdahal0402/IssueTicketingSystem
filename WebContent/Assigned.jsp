@@ -47,9 +47,10 @@
   				<div class="col-12">
 		  			<%	
 		  				String userName = session.getAttribute("uname").toString();
-						request.getSession(false);	
+						request.getSession(false);
+						String myFirstname = "";
+						String myLastname = "";
 						int roleid = 0;
-						int id = 0;
 						if(session == null) {
 							
 						} else {
@@ -68,10 +69,10 @@
 							try {
 								set = statement.executeQuery("SELECT * FROM users WHERE username = '" + userName + "'");
 								while(set.next()) {
-									id = set.getInt("id");
 									roleid = set.getInt("roleid");
+									myFirstname = set.getString("firstname");
+									myLastname = set.getString("lastname");
 									session.setAttribute("roleid", roleid);
-									session.setAttribute("id", id);
 								}
 							} catch(SQLException sqe) {
 								sqe.printStackTrace();
@@ -179,7 +180,81 @@
 						<th>Issue Request</th>
 					</thead>
 					<tbody>
-					
+						<%
+							String url = "jdbc:postgresql://ec2-54-235-246-201.compute-1.amazonaws.com/d712a16gfjlf2i";
+							String username = "qpvmvoqkxifbdv";
+							String password = "7bb011180f5880de08fe6c69f68647a5a8409ccc13528729b792dcdee7df9512";
+							Connection con = null;
+							Statement statement = null;
+							try {
+								con = DriverManager.getConnection(url, username, password);
+								statement = con.createStatement();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+							ResultSet resultSet = null;
+							try {
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + myFirstname + "%'" + "'%" + myLastname + "%'");
+								while(resultSet.next()) {
+									String status = resultSet.getString("status");
+						%>
+						<tr>
+							<td>
+								<%
+									out.println(resultSet.getString("name"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("department"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("assignedto"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("priority"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("scheduledcompletiondate"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("description"));
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("createdby"));
+								%>
+							</td>
+							<td>
+								<%
+									if(Integer.parseInt(status) == 0) {
+										out.println("Not Completed");
+									} else {
+										out.println("Completed");
+									}
+								%>
+							</td>
+							<td>
+								<%
+									out.println(resultSet.getString("issuerequestid"));
+								%>
+							</td>
+						</tr>
+						<%
+								}
+		    				} catch(SQLException e) {
+		    					e.printStackTrace();
+		    				}
+						%>
 					</tbody>
 				</table>
 			</div>
