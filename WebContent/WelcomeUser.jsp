@@ -121,8 +121,20 @@
 						</a>
 					</div>
 				</div>
+<%
+					if(roleid == 1){
+				%>
 				<div class="col-12 col-sm-6">
 					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/ViewQuestions.jsp" class="btn text-center p-4">
+							<h5>View Questions to Administrator</h5>
+						</a>
+					</div>
+				</div>
+				<%}else{ %>
+								<div class="col-12 col-sm-6">
+					<div class="card">
+						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/AskQuestion.jsp" class="btn text-center p-4">
 						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/Question.jsp" class="btn text-center p-4">
 							<h5>Ask Question to Administrator</h5>
 						</a>
@@ -131,6 +143,7 @@
 			</div>
 		</div>
 		<%
+				}
 			if(roleid == 1){
 		%>
 		<div class="container">
