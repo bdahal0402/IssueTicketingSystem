@@ -13,7 +13,7 @@
 	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<title>Assigned Tickets</title>
+		<title>Assigned Issue Requests and Tickets</title>
 		<style>
 			body, html {
 				height: 100%;
@@ -38,7 +38,7 @@
 		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
 		    </li>
 		    <li class="nav-item active">
-		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Requests / Tickets</a>
 		    </li>
 		  </ul>
 		</nav>
@@ -83,20 +83,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="container mt-3">
-			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 30px;">Assigned Tickets</h1>
-			</div>
-		</div>
-		<div class="container-fluid">
+		<div class="container-fluid mt-3">
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 						<th>Name</th>
 						<th>Department</th>
-						<th>Assigned To</th>
+						<th>Assigned</th>
 						<th>Priority</th>
-						<th>Scheduled Completion Date</th>
+						<th>Completion Date</th>
 						<th>Description</th>
 						<th>Created By</th>
 						<th>Status</th>
@@ -118,8 +113,7 @@
 							ResultSet resultSet = null;
 							try {
 								String fullname = myFirstname + " " + myLastname;
-								
-								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';"); 
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';");
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>
