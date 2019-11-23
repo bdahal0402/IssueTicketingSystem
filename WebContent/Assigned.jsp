@@ -13,7 +13,7 @@
 	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<title>Assigned Issue Requests and Tickets</title>
+		<title>Assigned Tickets</title>
 		<style>
 			body, html {
 				height: 100%;
@@ -38,7 +38,7 @@
 		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
 		    </li>
 		    <li class="nav-item active">
-		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Requests / Tickets</a>
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
 		    </li>
 		  </ul>
 		</nav>
@@ -79,87 +79,10 @@
 							}
 						}
 					%>
-					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Assigned Issue Request & Tickets</h1>
+					<h1 class="text-center" style="font-size: 45px; font-family: Arial; color: white">Assigned Tickets</h1>
 				</div>
 			</div>
 		</div>
-		<% if(roleid == 1) { %>
-		<div class="container mt-3">
-			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 30px;">Issue Requests</h1>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
-						<th>Creator</th>
-						<th>Request</th>
-						<th>Description</th>
-						<th>Department</th>
-						<th>Status</th>
-					</thead>
-					<tbody>
-							<%
-							String url = "jdbc:postgresql://ec2-54-235-246-201.compute-1.amazonaws.com/d712a16gfjlf2i";
-							String username = "qpvmvoqkxifbdv";
-							String password = "7bb011180f5880de08fe6c69f68647a5a8409ccc13528729b792dcdee7df9512";
-							Connection con = null;
-							Statement statement = null;
-							try {
-								con = DriverManager.getConnection(url, username, password);
-								statement = con.createStatement();
-							} catch (SQLException e) {
-								e.printStackTrace();
-							}
-							ResultSet set = null;
-							try {
-								set = statement.executeQuery("SELECT * FROM issuerequests");
-								while(set.next()) {
-									String status = set.getString("status");
-						%>
-						<tr>
-							<td>
-								<%
-									out.println(set.getString("username"));
-								%>
-							</td>
-							<td>
-								<%
-									out.println(set.getString("request"));
-								%>
-							</td>
-							<td>
-								<%
-									out.println(set.getString("description"));
-								%>
-							</td>
-							<td>
-								<%
-									out.println(set.getString("department"));
-								%>
-							</td>
-							<td>
-								<%
-									if(Integer.parseInt(status) == 0) {
-										out.println("Not Completed");
-									} else {
-										out.println("Completed");
-									}
-								%>
-							</td>
-						</tr>
-						<%
-								}
-							} catch(SQLException e) {
-								e.printStackTrace();
-							}
-						%>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<%} %>
 		<div class="container mt-3">
 			<div class="row h-100 justify-content-center align-items-center">
 				<h1 class="text-center" style="color: black;font-size: 30px;">Assigned Tickets</h1>
@@ -194,7 +117,9 @@
 							}
 							ResultSet resultSet = null;
 							try {
-								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + myFirstname + "%'" + "'%" + myLastname + "%'");
+								String fullname = myFirstname + " " + myLastname;
+								
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';"); 
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>

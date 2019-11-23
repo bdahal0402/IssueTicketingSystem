@@ -110,7 +110,7 @@
 										set = statement.executeQuery("SELECT * FROM Users");
 										while(set.next()) {	
 								%>
-							<option value="<% out.println(set.getString("lastname")); out.println(set.getString("firstname"));%>">
+							<option value="<% out.println(set.getString("firstname") + " " + set.getString("lastname")); %>">
 								<%
 										out.println(set.getString("firstname")); out.println(set.getString("lastname"));
 									}
