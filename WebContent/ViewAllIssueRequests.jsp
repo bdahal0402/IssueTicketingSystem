@@ -67,7 +67,7 @@
 							}
 							ResultSet set = null;
 							try {
-								set = statement.executeQuery("SELECT * FROM issuerequests");
+								set = statement.executeQuery("SELECT * FROM issuerequests ORDER BY ID DESC");
 								while(set.next()) {
 									String status = set.getString("status");
 						%>
@@ -135,7 +135,7 @@
 						<%
 							ResultSet resultSet = null;
 							try {
-								resultSet = statement.executeQuery("SELECT * FROM tickets");
+								resultSet = statement.executeQuery("SELECT * FROM tickets ORDER BY ID DESC");
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>
