@@ -101,7 +101,7 @@
 							}
 							ResultSet set = null;
 							try {
-								set = statement.executeQuery("SELECT * FROM issuerequests WHERE department IN (SELECT department FROM users WHERE username LIKE '%" + name + "%')");
+								set = statement.executeQuery("SELECT * FROM issuerequests WHERE department IN (SELECT department FROM users WHERE username LIKE '%" + name + "%') ORDER BY ID DESC");
 								while(set.next()) {
 									String status = set.getString("status");
 						%>
@@ -176,7 +176,7 @@
 							}
 							ResultSet resultSet = null;
 							try {
-								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE department IN (SELECT department FROM users WHERE username LIKE '%" + name + "%')");
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE department IN (SELECT department FROM users WHERE username LIKE '%" + name + "%') ORDER BY ID DESC");
 								while(resultSet.next()) {	
 									String status = resultSet.getString("status");
 						%>
