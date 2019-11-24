@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -42,14 +43,35 @@ public class UpdateTicket extends HttpServlet implements SetConnection {
 			
 			Statement stmt = con.createStatement();
 			
-			String values = String.format("'%s', '%s'", ticketid, status);
+			
+			
+			//getting issuerequestid from table
+			
+			String issuerequestid = "";
+			
+			ResultSet set = null;
+			set = stmt.executeQuery("SELECT * FROM tickets WHERE id = " + ticketid);
+			while(set.next()) {
+				issuerequestid = set.getString("issuerequestid");
+			}
+			
+				
+			
+			
+			
+			
+			
 			int rows;
+			int rows1;
 			if (status.toLowerCase().contains("not")) {
 				rows = stmt.executeUpdate("UPDATE tickets SET status = '0' WHERE id = " + ticketid);
+				rows1 = stmt.executeUpdate("UPDATE issuerequests SET status = '0' WHERE request LIKE '" + issuerequestid + "'");
 				status = "Not completed";
 			}
-			else
+			else {
 				rows = stmt.executeUpdate("UPDATE tickets SET status = '1' WHERE id = " + ticketid);
+				rows1 = stmt.executeUpdate("UPDATE issuerequests SET status = '1' WHERE request LIKE '" + issuerequestid + "'");
+			}
 
 			if(rows == 1) {
 				response.setContentType("text/html");
