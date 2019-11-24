@@ -38,7 +38,7 @@
 		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
 		    </li>
 		    <li class="nav-item active">
-		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Requests / Tickets</a>
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
 		    </li>
 		  </ul>
 		</nav>
@@ -113,7 +113,8 @@
 							ResultSet resultSet = null;
 							try {
 								String fullname = myFirstname + " " + myLastname;
-								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%' ORDER BY ID DESC;");
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';");
+								int i = 0;
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>
@@ -158,8 +159,7 @@
 									out.println(resultSet.getString("issuerequestid"));
 								%>
 							</td>
-							<td>	
-								<%out.println(resultSet.getString("id")); %>
+							<td>
 								<form action="UpdateTicket" method="post">
 									<input type="hidden" id="ticketid" name="ticketid" value="<%out.println(resultSet.getString("id")); %>" />
 									<select class="form-control" id="status" name="status" required>
@@ -175,7 +175,7 @@
 										}
 										%>
 									</select>
-									<button class="btn-success form-control mt-2" name="buttonVal" value="<%out.println(resultSet.getString("id")); %>" type="submit">Update</button>
+									<button class="btn-success form-control mt-2" name="buttonVal"  value="<%out.println(resultSet.getString("id")); %>" type="submit">Update</button>
 								</form>
 							</td>
 						</tr>

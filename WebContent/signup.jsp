@@ -67,6 +67,7 @@
 							<option value="Executive">Executive</option>
 							<option value="Sales Department">Sales Department</option>
 							<option value="Purchase Department">Purchase Department</option>
+							<option value="Maintenance Department">Maintenance Department</option>
 						</select>
 					</div>
 				</div>
