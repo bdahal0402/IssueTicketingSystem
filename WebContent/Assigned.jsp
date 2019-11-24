@@ -113,8 +113,7 @@
 							ResultSet resultSet = null;
 							try {
 								String fullname = myFirstname + " " + myLastname;
-								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%';");
-								int i = 0;
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE assignedto LIKE '%" + fullname + "%' ORDER BY ID DESC;");
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>
@@ -159,7 +158,8 @@
 									out.println(resultSet.getString("issuerequestid"));
 								%>
 							</td>
-							<td>
+							<td>	
+								<%out.println(resultSet.getString("id")); %>
 								<form action="UpdateTicket" method="post">
 									<input type="hidden" id="ticketid" name="ticketid" value="<%out.println(resultSet.getString("id")); %>" />
 									<select class="form-control" id="status" name="status" required>
@@ -175,7 +175,7 @@
 										}
 										%>
 									</select>
-									<button class="btn-success form-control mt-2" name="buttonVal"  value="<%out.println(resultSet.getString("id")); %>" type="submit">Update</button>
+									<button class="btn-success form-control mt-2" name="buttonVal" value="<%out.println(resultSet.getString("id")); %>" type="submit">Update</button>
 								</form>
 							</td>
 						</tr>
