@@ -46,9 +46,9 @@ else{ %>
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
-						<th>ID</th>
 						<th>Email</th>
 						<th>Question</th>
+						<th>Respond</th>
 					</thead>
 					<tbody>
 						<%
@@ -61,13 +61,11 @@ else{ %>
 								Statement statement = con.createStatement();
 								ResultSet set = statement.executeQuery("SELECT * FROM questions");
 								while(set.next()) {
+									
+									String status = set.getString("status");
 						%>
 						<tr>
-							<td>
-								<%
-									out.println(set.getString("id"));
-								%>
-							</td>
+						
 							<td>
 								<%
 									out.println(set.getString("email"));
@@ -77,6 +75,21 @@ else{ %>
 								<%
 									out.println(set.getString("question"));
 								%>
+							</td>
+							<td>
+								<form action="AnswerQuestion" method="post">
+									<input type="hidden" id="questionId" name="questionId" value="<%out.println(set.getString("id")); %>" />
+									
+									<%if(Integer.parseInt(status) == 0) { %>
+										<textarea name="message" rows="2" cols="40"></textarea>
+										<button class="btn-success form-control mt-2" name="answerButton"  value="<%out.println(set.getString("id")); %>" type="submit">Answer Question</button>
+									<%}
+									else{
+										out.println("Question Answered");
+									}%>
+									
+								</form>
+						
 							</td>
 						
 						</tr>

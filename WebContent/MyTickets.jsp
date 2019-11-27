@@ -34,41 +34,15 @@
 		</head>
 	<body>
 		<%
-		if(session.getAttribute("uname") == null){
-			response.sendRedirect("Home.jsp");
-		} else{
-		    String name = session.getAttribute("uname").toString();
-		    int roleid = 0;
-		    request.getSession(false);
+			request.getSession(false);
 		    if(session == null) {
 		    	
 		    } else {
-		    	String url = "jdbc:postgresql://ec2-54-235-246-201.compute-1.amazonaws.com/d712a16gfjlf2i";
-				String username = "qpvmvoqkxifbdv";
-				String password = "7bb011180f5880de08fe6c69f68647a5a8409ccc13528729b792dcdee7df9512";
-				Connection con = null;
-				Statement statement = null;
-				try {
-					con = DriverManager.getConnection(url, username, password);
-					statement = con.createStatement();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				ResultSet set = null;
-				try {
-					set = statement.executeQuery("SELECT roleid FROM users WHERE username = '" + name + "'");
-					while(set.next()) {
-						roleid = set.getInt("roleid");
-						session.setAttribute("roleid", roleid);
-					}
-				} catch (SQLException sqe) {
-					sqe.printStackTrace();
-				}
-		    }
+		    	Object name = session.getAttribute("uname");
 		%>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
-				<h1 class="text-center" style="color: black;font-size: 40px;">My Created Issue Requests<%if(roleid == 1) {%> & Tickets<%} %></h1>
+				<h1 class="text-center" style="color: black;font-size: 40px;">My Created Issue Requests & Tickets</h1>
 			</div>
 		</div>
 		<div class="container mt-3">
@@ -101,7 +75,7 @@
 							}
 							ResultSet set = null;
 							try {
-								set = statement.executeQuery("SELECT * FROM issuerequests WHERE username LIKE '%" + name + "%' ORDER BY ID DESC");
+								set = statement.executeQuery("SELECT * FROM issuerequests WHERE username LIKE '%" + name + "%'");
 								while(set.next()) {
 									String status = set.getString("status");
 						%>
@@ -175,7 +149,7 @@
 							}
 							ResultSet resultSet = null;
 							try {
-								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE createdby LIKE '%" + name + "%' ORDER BY ID DESC");
+								resultSet = statement.executeQuery("SELECT * FROM tickets WHERE createdby LIKE '%" + name + "%'");
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>

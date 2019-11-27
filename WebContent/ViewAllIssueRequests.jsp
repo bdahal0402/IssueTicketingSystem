@@ -67,7 +67,7 @@
 							}
 							ResultSet set = null;
 							try {
-								set = statement.executeQuery("SELECT * FROM issuerequests ORDER BY ID DESC");
+								set = statement.executeQuery("SELECT * FROM issuerequests");
 								while(set.next()) {
 									String status = set.getString("status");
 						%>
@@ -130,12 +130,13 @@
 						<th>Created By</th>
 						<th>Status</th>
 						<th>Associated Issue Request</th>
+						<th>Delete</th>
 					</thead>
 					<tbody>
 						<%
 							ResultSet resultSet = null;
 							try {
-								resultSet = statement.executeQuery("SELECT * FROM tickets ORDER BY ID DESC");
+								resultSet = statement.executeQuery("SELECT * FROM tickets");
 								while(resultSet.next()) {
 									String status = resultSet.getString("status");
 						%>
@@ -188,6 +189,14 @@
 								<%
 									out.println(resultSet.getString("issuerequestid"));
 								%>
+							</td>
+							<td>
+							
+							<form action="DeleteTicket" method="post">
+									<button class="btn-success form-control mt-2" name="deleteButton"  value="<%out.println(resultSet.getString("id"));%>" type="submit">Delete</button>
+								</form>
+							
+							
 							</td>
 						</tr>
 						<%

@@ -109,6 +109,8 @@
 									}
 									ResultSet set = null;
 									try {
+										
+										
 										set = statement.executeQuery("SELECT * FROM Users");
 										while(set.next()) {	
 								%>
@@ -147,23 +149,28 @@
 				<div class="row pt-3">
 					<div class="col-12 col-sm-12">
 						<label>Ticket for Issue Request</label>
-						<select class="form-control" name="issuerequestid" id="issuerequestid" required>
+						<select class="form-control" name="issuerequestid" required>
 							<option value="">Select a Issue Request</option>
 							<%
 								ResultSet setTicketName = null;
 								try {
+									//int count = 0;
+									//String[] value = new String[100];
+									
+									
 									setTicketName = statement.executeQuery("SELECT id, request FROM issuerequests WHERE status = '0'");
 									while(setTicketName.next()) {
+										
+										//value[count] = "[" + String.valueOf(setTicketName.getString("request")) + "]";
+										//count++;
 							%>
-							<option value="<%out.println(setTicketName.getString("request"));%>">
-							<%out.println(setTicketName.getString("request"));%>
-								<%
+							<option><%out.println(setTicketName.getString("request"));%></option>
+								<% 
 										}
 									} catch (SQLException e) {
 										e.printStackTrace();
 									}
 								%>
-							</option>
 						</select>
 					</div>
 				</div>
