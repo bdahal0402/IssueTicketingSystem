@@ -32,6 +32,16 @@
 		</style>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+		  <ul class="navbar-nav">
+		    <li class="nav-item active">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
+		    </li>
+		  </ul>
+		</nav>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
 				<h1 class="text-center" style="color: black;font-size: 40px;">View Created Issue Requests & Tickets</h1>
@@ -191,12 +201,9 @@
 								%>
 							</td>
 							<td>
-							
 							<form action="DeleteTicket" method="post">
-									<button type="submit" class="btn-danger form-control mt-2" value="<%out.println(resultSet.getString("id")); %>" name="deleteButton">Delete</button>
-								</form>
-							
-							
+								<button type="submit" class="btn-danger form-control mt-2" value="<%out.println(resultSet.getString("id")); %>" name="deleteButton">Delete</button>
+							</form>
 							</td>
 						</tr>
 						<%
