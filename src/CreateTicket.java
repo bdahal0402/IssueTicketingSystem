@@ -1,4 +1,3 @@
-package TicketPackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,7 +38,7 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 		String Description  = request.getParameter("description");
 		String Status       = request.getParameter("status");
 		String IssueRequest = request.getParameter("issuerequestid");
-		
+				
 		Connection con = null;
 		
 		try {
@@ -53,8 +52,7 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 			
 			Statement stmt = con.createStatement();
 			
-			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'", TicketName, 
-					Department, AssignedTo, Priority, Date, Description, CreatedBy, Status, IssueRequest);
+			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'", TicketName, Department, AssignedTo, Priority, Date, Description, CreatedBy, Status, IssueRequest);
 			
 			System.out.println(values);
 			
