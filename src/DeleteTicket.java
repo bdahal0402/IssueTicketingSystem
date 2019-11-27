@@ -1,3 +1,5 @@
+package TicketPackage;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -44,10 +46,6 @@ public class DeleteTicket extends HttpServlet implements SetConnection {
 			Statement stmt = con.createStatement();
 			
 			
-			
-			//getting email from table
-			
-			
 			String ticketname = "";
 			String requestName = "";
 			
@@ -58,24 +56,18 @@ public class DeleteTicket extends HttpServlet implements SetConnection {
 				requestName = set.getString("issuerequestid");
 			}
 			
+			//deleting ticket
+			System.out.println("deleting tickets row");
+			stmt.executeUpdate("DELETE from tickets WHERE id = " + ticketid);
 			
-		
-				//deleting ticket
-				System.out.println("deleting tickets row");
-				stmt.executeUpdate("DELETE from tickets WHERE id = " + ticketid);
-				
-				//deleting associated request
-				int row;				
-				
-				row = stmt.executeUpdate("DELETE from issuerequests WHERE request LIKE '" + requestName + "'");
-
+			//deleting associated request
+			stmt.executeUpdate("DELETE from issuerequests WHERE request LIKE '" + requestName + "'");
 			
-				response.setContentType("text/html");
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Ticket named: [" + ticketname + "] has been deleted')");
-				out.println("location='ViewAllIssueRequests.jsp';");
-				out.println("</script>");
-			
+			response.setContentType("text/html");
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Ticket named: [" + ticketname + "] has been deleted')");
+			out.println("location='ViewAllIssueRequests.jsp';");
+			out.println("</script>");
 			
 			con.close();
 			
