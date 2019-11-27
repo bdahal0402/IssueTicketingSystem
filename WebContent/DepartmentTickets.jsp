@@ -66,6 +66,16 @@
 					}
 			    }
 		%>
+		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+		  <ul class="navbar-nav">
+		    <li class="nav-item active">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
+		    </li>
+		  </ul>
+		</nav>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
 				<h1 class="text-center" style="color: black;font-size: 40px;">Created Issue Requests <%if(roleid == 1) {%>& Tickets <%} %>by Department</h1>
