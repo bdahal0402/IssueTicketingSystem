@@ -193,7 +193,7 @@
 							<td>
 							
 							<form action="DeleteTicket" method="post">
-									<button class="btn-success form-control mt-2" name="deleteButton"  value="<%out.println(resultSet.getString("id"));%>" type="submit">Delete</button>
+									<button type="submit" class="btn-danger form-control mt-2" value="<%out.println(resultSet.getString("id")); %>" name="deleteButton">Delete</button>
 								</form>
 							
 							
