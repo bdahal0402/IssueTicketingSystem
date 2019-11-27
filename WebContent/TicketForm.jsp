@@ -48,6 +48,16 @@
 		</script>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+		  <ul class="navbar-nav">
+		    <li class="nav-item active">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
+		    </li>
+		  </ul>
+		</nav>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
 				<div class="col-12">
@@ -154,23 +164,16 @@
 							<%
 								ResultSet setTicketName = null;
 								try {
-									//int count = 0;
-									//String[] value = new String[100];
-									
-									
 									setTicketName = statement.executeQuery("SELECT id, request FROM issuerequests WHERE status = '0'");
 									while(setTicketName.next()) {
-										
-										//value[count] = "[" + String.valueOf(setTicketName.getString("request")) + "]";
-										//count++;
 							%>
 							<option><%out.println(setTicketName.getString("request"));%></option>
-								<% 
-										}
-									} catch (SQLException e) {
-										e.printStackTrace();
+							<% 
 									}
-								%>
+								} catch (SQLException e) {
+									e.printStackTrace();
+								}
+							%>
 						</select>
 					</div>
 				</div>
