@@ -2,11 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<% if(session.getAttribute("uname") == null){
-			response.sendRedirect("Home.jsp");
-		}
-		else{
-			%>
 	<head>
 		<meta charset="ISO-8859-1">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -43,6 +38,16 @@
 		</script>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+		  <ul class="navbar-nav">
+		    <li class="nav-item active">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/WelcomeUser.jsp">Created Requests / Tickets</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Assigned.jsp">Assigned Tickets</a>
+		    </li>
+		  </ul>
+		</nav>
 		<div class="hero-image">
 			<div class="row h-100 justify-content-center align-items-center">
 				<div class="col-12">
@@ -51,7 +56,7 @@
 						if(session == null) {
 							
 						} else {
-							String name = session.getAttribute("uname").toString();
+							Object name = session.getAttribute("uname");
 					%>
 					<h1 class="text-center" style="color: white;font-size: 45px;">Create an Issue Request</h1>
 				</div>
@@ -80,7 +85,6 @@
 							<option value="Executive">Executive</option>
 							<option value="Sales Department">Sales Department</option>
 							<option value="Purchase Department">Purchase Department</option>
-							<option value="Maintenance Department">Maintenance Department</option>
 						</select>
 					</div>
 				</div>
@@ -97,11 +101,5 @@
 			}
 		%>
 		<div id="error"></div>
-		<div class="container mt-5">
-			<button class="btn btn-danger" type="button"><a style="text-decoration: none; color:white" href="http://localhost:8080/WebApplicationIssueTrackingSystem/Home.jsp">Logout</a></button>
-		</div>
 	</body>
-	<% }
-	%>
-	
 </html>
