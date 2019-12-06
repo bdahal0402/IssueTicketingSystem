@@ -2,17 +2,17 @@ package TicketPackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import java.sql.*;
 
 //Servlet implementation class SignUp
 @SuppressWarnings("serial")
@@ -50,30 +50,31 @@ public class IssueRequest extends HttpServlet implements SetConnection {
 			
 			con = DriverManager.getConnection(url, username, password);
 			
-			Statement stmt = con.createStatement();
+			String query = "INSERT INTO issuerequests(username, request, department, description, status) VALUES (?, ?, ?, ?, '0');";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, userName);
+			stmt.setString(2, changedRequest);
+			stmt.setString(3, departmentForm);
+			stmt.setString(4, changedDescription);
 			
-			String values = String.format("'%s', '%s', '%s', '%s', '%s'", userName, changedRequest, departmentForm, changedDescription, Status);
-			
-			System.out.println(values);
-			
-			int rows = stmt.executeUpdate("INSERT INTO issuerequests(username, "
-					+ "request, "
-					+ "department, "
-					+ "description, "
-					+ "status) VALUES (" + values + ")");
-			
-			if(rows == 1) {
-				response.setContentType("text/html");
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('The issue request was recorded.')");
-				out.println("location='WelcomeUser.jsp';");
-				out.println("</script>");
-			} else {
-				response.setContentType("text/html");
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('The issue request could not be recorded. ')");
-				out.println("location='IssueRequest.jsp';");
-				out.println("</script>");
+			try {
+				int rows = stmt.executeUpdate();
+				
+				if(rows == 1) {
+					response.setContentType("text/html");
+					out.println("<script type=\"text/javascript\">");
+					out.println("alert('The issue request was recorded.')");
+					out.println("location='WelcomeUser.jsp';");
+					out.println("</script>");
+				} else {
+					response.setContentType("text/html");
+					out.println("<script type=\"text/javascript\">");
+					out.println("alert('The issue request could not be recorded. ')");
+					out.println("location='IssueRequest.jsp';");
+					out.println("</script>");
+				}
+			} catch (org.postgresql.util.PSQLException e) {
+				e.printStackTrace();
 			}
 			
 			con.close();
