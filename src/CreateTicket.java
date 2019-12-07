@@ -1,17 +1,15 @@
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 //Servlet implementation class SignUp
 @SuppressWarnings("serial")
@@ -24,6 +22,7 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		@SuppressWarnings("unused")
 		PrintWriter out = response.getWriter();
@@ -31,14 +30,14 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 		
 		String TicketName   = request.getParameter("ticketname");
 		String Department   = request.getParameter("department");
-		String CreatedBy    = request.getParameter("uname");
 		String AssignedTo   = request.getParameter("user");
 		String Priority     = request.getParameter("priority");
 		String Date         = request.getParameter("date");
 		String Description  = request.getParameter("description");
+		String CreatedBy    = request.getParameter("uname");
 		String Status       = request.getParameter("status");
 		String IssueRequest = request.getParameter("issuerequestid");
-				
+		
 		Connection con = null;
 		
 		try {
@@ -50,21 +49,18 @@ public class CreateTicket extends HttpServlet implements SetConnection {
 			
 			con = DriverManager.getConnection(url, username, password);
 			
-			Statement stmt = con.createStatement();
+			String query = "INSERT INTO tickets(Name, Department, AssignedTo, Priority, scheduledcompletiondate, description, createdby, status, issuerequestid) VALUES (?,?,?,?,?,?,?,'0',?);";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, TicketName);
+			stmt.setString(2, Department);
+			stmt.setString(3, AssignedTo);
+			stmt.setString(4, Priority);
+			stmt.setString(5, Date);
+			stmt.setString(6, Description);
+			stmt.setString(7, CreatedBy);
+			stmt.setString(8, IssueRequest);
 			
-			String values = String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'", TicketName, Department, AssignedTo, Priority, Date, Description, CreatedBy, Status, IssueRequest);
-			
-			System.out.println(values);
-			
-			int rows = stmt.executeUpdate("INSERT INTO tickets(Name,"
-					+ "Department, "
-					+ "AssignedTo, "
-					+ "Priority, "
-					+ "scheduledcompletiondate, "
-					+ "description, "
-					+ "createdby, "
-					+ "status, "
-					+ "issuerequestid) VALUES (" + values + ")");
+			int rows = stmt.executeUpdate();
 			
 			if(rows == 1) {
 				response.setContentType("text/html");
