@@ -106,7 +106,7 @@
 				<div class="col-12 col-sm-6">
 					<div class="card">
 						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/MyTickets.jsp" class="btn text-center p-4">
-							<h5>View My Requests / Tickets</h5>
+							<h5>View My Requests<%if(roleid == 1){ %> / Tickets<%} %></h5>
 						</a>
 					</div>
 				</div>
@@ -117,7 +117,7 @@
 				<div class="col-12 col-sm-6">
 					<div class="card">
 						<a href="http://localhost:8080/WebApplicationIssueTrackingSystem/DepartmentTickets.jsp" class="btn text-center p-4">
-							<h5>View Department Requests / Tickets</h5>
+							<h5>View Department Requests<%if(roleid == 1){ %> / Tickets<%} %></h5>
 						</a>
 					</div>
 				</div>
